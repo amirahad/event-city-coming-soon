@@ -1,13 +1,13 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -68,6 +68,7 @@ body {
   position: absolute;
   opacity: 0.1;
   animation: float 6s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .floating-icon:nth-child(2n) {
@@ -80,4 +81,20 @@ body {
 
 .floating-icon:nth-child(4n) {
   animation-duration: 12s;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-black/40 backdrop-blur-lg border border-white/10;
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 text-transparent bg-clip-text;
+  }
 }

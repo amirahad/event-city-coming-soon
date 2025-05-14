@@ -118,14 +118,20 @@ export default function Home() {
   return (
     <main className="min-h-screen animated-gradient relative overflow-hidden">
       <FloatingIcons />
-      <div className="min-h-screen flex items-center justify-center p-4 bg-black/30">
+      <div className="absolute inset-0 bg-black opacity-30" />
+      <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
         <Toaster position="top-center" />
-        <div className="max-w-2xl w-full relative z-10">
+        <div className="max-w-2xl w-full">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="bg-black/10 backdrop-blur-sm rounded-3xl p-8 md:p-12 text-center border border-white/5"
+            className="rounded-3xl p-8 md:p-12 text-center"
+            style={{
+              backgroundColor: 'rgba(0, 0, 0, 0.4)',
+              backdropFilter: 'blur(16px)',
+              border: '1px solid rgba(255, 255, 255, 0.1)'
+            }}
           >
             <motion.div
               initial={{ scale: 0.5, opacity: 0 }}
@@ -148,7 +154,12 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 text-transparent bg-clip-text mb-4"
+              className="text-4xl md:text-5xl font-bold mb-4"
+              style={{
+                background: 'linear-gradient(to right, #60A5FA, #A78BFA, #60A5FA)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent'
+              }}
             >
               Get Ready for the Ultimate Event Experience
             </motion.h1>
@@ -175,12 +186,20 @@ export default function Home() {
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 px-6 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                className="flex-1 px-6 py-3 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                style={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)'
+                }}
               />
               <button
                 type="submit"
                 disabled={isLoading}
-                className="px-8 py-3 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-8 py-3 rounded-lg text-white font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                style={{
+                  background: 'linear-gradient(to right, #2563EB, #7C3AED)',
+                  backgroundSize: '200% auto'
+                }}
               >
                 {isLoading ? 'Joining...' : 'Join Waitlist'}
               </button>
@@ -192,15 +211,19 @@ export default function Home() {
               transition={{ delay: 0.6 }}
               className="mt-12 flex flex-wrap justify-center gap-6 text-sm text-gray-400"
             >
-              <span className="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full">
-                <span className="w-4 h-4">🎯</span> Personalized Events
-              </span>
-              <span className="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full">
-                <span className="w-4 h-4">✨</span> Seamless Planning
-              </span>
-              <span className="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full">
-                <span className="w-4 h-4">🎊</span> Unforgettable Experiences
-              </span>
+              {[
+                { icon: '🎯', text: 'Personalized Events' },
+                { icon: '✨', text: 'Seamless Planning' },
+                { icon: '🎊', text: 'Unforgettable Experiences' }
+              ].map((feature, index) => (
+                <span
+                  key={index}
+                  className="flex items-center gap-2 px-4 py-2 rounded-full"
+                  style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
+                >
+                  <span className="w-4 h-4">{feature.icon}</span> {feature.text}
+                </span>
+              ))}
             </motion.div>
           </motion.div>
         </div>
